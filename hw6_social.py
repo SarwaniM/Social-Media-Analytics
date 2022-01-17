@@ -87,28 +87,24 @@ Parameters: str
 Returns: list of strs
 '''
 def findHashtags(message):
-    hashtags=[]
-    words=[]
-    new=[]
-    chars =  "[@_!$%^&*`;+=(.,)<->?/\|}'{~:]"
-
-    for i in chars:
-        if i in message:
-           message=  message.replace(i," ")
-    words= message.split()
-    # print(message)
-
-    for i in range(len(words)):
-        if words[i][0]=="#":
-     #main code ends here
-            if words[i].count("#")>1:
-               new=words[i].split("#",2)
-               #print(new)
-               for j in range(1,len(new)):
-                  new[j]="#"+new[j]
-                  hashtags.append(new[j])
-            else: hashtags.append(words[i])
-    # print(hashtags)
+    hashtags=[]  
+    hashtag="#"
+    list2=[]
+    list=message.split("#")
+    for i in range(1,len(list)):
+        list2.append(list[i])
+    #print(list2)
+    for word in list2:
+       # print(word)
+        for char in word:
+            if char in endChars:
+                #hello=i.split(k)  
+                break
+            else: 
+                hashtag+=char      
+       # print(hello)
+        hashtags.append(hashtag)
+        hashtag="#"
     return hashtags
 
 
@@ -172,7 +168,7 @@ def findSentiment(classifier, message):
     elif score >0.1:
         return "positive"
     else: return "neutral"
-    
+
 
 '''
 addSentimentColumn(data)
@@ -182,6 +178,7 @@ Returns: None
 '''
 def addSentimentColumn(data):
     classifier = SentimentIntensityAnalyzer()
+ 
     return
 
 
@@ -355,5 +352,4 @@ if __name__ == "__main__":
     # test.testParseState()
     #test.testFindHashtags()
     #test.testGetRegionFromState()
-    #test.testAddColumns()
-    test.testFindSentiment()
+    test.testAddColumns()
